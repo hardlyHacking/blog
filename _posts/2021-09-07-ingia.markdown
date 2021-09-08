@@ -1,0 +1,36 @@
+---
+layout: post
+title: 'Ingia'
+date: '2021-09-07 11:53:38'
+tags:
+- iOS
+- Authentication
+---
+
+Another month goes by, and I work on another side project! Introducing [Ingia](https://twitter.com/ingia_app), a more convenient SMS 2FA app. SMS 2FA has been known to be insecure for [many years](https://krebsonsecurity.com/2021/03/can-we-stop-pretending-sms-is-secure-now/). Between [Sim Swap](https://www.cnet.com/tech/mobile/t-mobile-data-breach-and-sim-swap-scam-how-to-protect-your-identity/) attacks, [phishing scams](https://dcid.me/notes/2013-apr-19.html) like the one that hit Cloudflare, the Telephone companies' own horrible security standards (looking at you T-Mobile), or this latest hack where your text messages can be rerouted to hackers [for just $16](https://www.theverge.com/2021/3/15/22332315/sms-redirect-flaw-exploit-text-message-hijacking-hacking).
+
+VIPs like Twitter CEO [Jack Dorsey](https://www.nytimes.com/2019/09/05/technology/sim-swap-jack-dorsey-hack.html), NBA player [Giannis](https://twitter.com/raygotu12/status/1258514601555013632), and [many many others](https://threatpost.com/celeb-sim-swap-crime-ring-100m/163888/) are among those who have fallen victim to such scams in the past.
+
+Naturally, if your website supports TOTP or (ideally) hardware tokens, you should be using those. But many don't. Shockingly, many banks are among those still refuse to implement a non-SMS 2FA verification mechanism. enter Ingia, my lastest project.
+
+Ingia is (slightly) more secure than the alternative. With Ingia, we set up a VOIP phone number that's completely separate from your actual number. If an attacker calls TMobile pretending to be you, TMobile has no notion of this phone number. For just $1 / mo, Ingia can help secure you against SIM swap attacks. Additionally, because Ingia delivers the results over encrypted HTTPS, you can share your 2FA accounts with multiple users.
+
+Ingia was originally built just for myself - Ahana and I are constantly yelling at each other asking for 2FA codes throughout the day, but with Ingia we both get a push notification whenever someone tries to log in. No more asking for codes.
+
+Ingia has also already started ingesting the Short Code directory to validate senders and detect spam.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">TIL there’s actually a short code directory which maps who owns the various short code numbers. For example, Twilio, Square and Signal all use Authy which is why all their messages come from the same number. <a href="https://t.co/eDD4GCPMdM">pic.twitter.com/eDD4GCPMdM</a></p>&mdash; Chander ரமேஷ் (@chander) <a href="https://twitter.com/chander/status/1428268871861997573?ref_src=twsrc%5Etfw">August 19, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+With this, for example, Ingia can detect that any number that isn't 22000 isn't actually Google.
+
+In the future Ingia will have a notion of unique profiles for each person and which accounts each person can have access to. For example, Ingia users will be able to set up an explicit Family Plan and define who gets access to 2FA codes from Bank of America versus Netflix (perhaps everyone can have Netflix codes but only Admins can have BoA codes).
+
+[Many companies](https://www.reddit.com/r/Googlevoice/comments/i0bjgm/list_of_institutions_that_fail_to_deliver_sms_to/) currently try and detect VOIP numbers to block them. This was a fun problem that I tried to solve for many weeks. To understand it more deeply, I highly recommend [this article](http://blog.2600hz.com/secrets-of-the-phone-network-why-you-cant-text) that describes in detail how SMS is routed. In short, there's a completely separate database for SMS routing apart from phone call routing - mostly becuase SMS was a newer protocol, and as such there's several different databases that maintain registries of which phone number belongs to whom.
+
+This is why sometimes when you port your phone number voice might work immediately but SMS may lag by even a couple days. This is also how hosted SMS providers work. While your phone numbers for calling purposes remains unchanged, in the case of hosted SMS, the provider is updating the SMS registry to route your texts to a new VOIP number and then relaying those messages to you.
+
+Although there is no way to detect a VOIP number as such, you can look up who owns phone number in general. The vast majority of VOIP numbers are owned by Bandwidth, Twilio, or Vonage - and institutions can see this metadata and block this number.
+
+After talking to many companies, there is no clean way around this limitation. It's unclear exactly what threat vector BoA is trying to solve by blocking VOIP numbers (even if a scammer gets a VOIP number, surely they can't sign up for a new account with a unique SSN?), but regardless many companies are doing this. For this use case, Ingia has a separate premium tier which for $10 / month circumvents these issues. For now, I'm going to keep that solution and how it works a secret `:)`.
+
+Overall this was a very fun side project, and I learned quite a bit about how SMS works!
