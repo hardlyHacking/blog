@@ -1,0 +1,22 @@
+---
+layout: post
+title: 'Moving to Substack!'
+date: '2021-11-11 13:29:09'
+tags:
+- Substack
+- Blog
+---
+
+Seven years ago, I issued an edict to myself: I would write one blog post every month. I had tried on and off for years to keep writing consistently, but any effort would always fizzle out after a couple days or weeks. The difficulty, I realized, came in the frequency.
+
+Any sort of daily blog was simply too much pressure. Would I have anything interesting to write about? My life was pretty bland. A month though - that was enough time - even for a cronic procrastinator like me.
+
+Somehow, it worked. It's been over 80 blog posts, and I'm still going strong!
+
+Of course I fall behind sometimes, but never by more than two or three posts, and by then enough time has passed that I have things to write about.
+
+In that time I've moved this blog about plenty of times. I initially had it on Github pages, then Ghost, then back to Pages, and now, [Substack](https://c10r.substack.com/p/covid-cruising). The writing experience is just nice enough that it's worth the transition for me. In addition, the analytics dashboard, the option for it to be paid - and perhaps most important to me recently - SEO.
+
+I never started this blog to be available to the wider public. Instead, it was meant to be a diary for myself and simultaneously and impeteus to _do_ something, at least once a month.
+
+But now I've grown to love writing and the clarity it brings to my own reflections about my experiences, and I hope that these thoughts help others! So to that end, while this site isn't going anywhere, all future posts will be found on Substack. Hope you subscribe! 👋
